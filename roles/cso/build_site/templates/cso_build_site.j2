@@ -1,0 +1,153 @@
+#jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
+input:
+  tenant_name: Redtail
+  deployment_scenario: managed_wan_v2
+  site:
+    - site_name: "{{ site_name_dictionary.space_replaced }}"
+      site_basic_properties:
+        site_name: "{{ site_name_dictionary.space_replaced }}"
+        site_group: []
+        site_role: SPOKE
+        dvpn_params:
+          create_dvpn_threshold: '5'
+          delete_dvpn_threshold: '2'
+        site_address:
+          street: "{{ site_data.street_address }}"
+          city: "{{ site_data.city }}"
+          state: "{{ site_data.state }}"
+          zip_code: "{{ site_data.zip_code }}"
+          {% if site_data.country is defined %}
+          {% if site_data.country == "United States" %}
+          country: "US"
+          {% else %}
+          country: "{{ site_data.country }}"
+          {% endif %}
+          {% else %}
+          country: "US"
+          {% endif %}
+        site_contact:
+          contact_name: "{{ site_data.contact_name }}"
+          email_address:  "{{ site_data.contact_email }}"
+          phone_number: "{{ site_data.contact_phone }}"
+        network_seg: true
+        cloud_service: EDGE
+        site_type: on_premise
+        topology: mesh
+        sla_mgmt: FINE
+        device_template:
+          - template_name: "{{ site_devices.cpe.config_context.device_template }}"
+            device_name: "{{ site_name_dictionary.space_replaced }}"
+            wan_link_info:
+              {% for wan in site_devices.cpe.config_context.wan %}
+              - wan_link: "{{ wan.wan_link }}"
+                wan_link_type: "{{ wan.wan_link_type }}"
+                cost_currency: "{{ wan.cost_currency }}"
+                {% if wan.access_type is defined %}
+                access_type: "{{ wan.access_type }}"
+                {% endif %}
+                local_breakout_enabled: {{ wan.local_breakout_enabled | bool }}
+                provider: "{{ wan.provider }}"
+                cost: {{ wan.cost | int }}
+                default_link: {{ wan.default_link | bool }}
+                backup_link: {{ wan.backup_link | bool }}
+                {% if wan.preferred_breakout_link is defined %}
+                preferred_breakout_link: {{ wan.preferred_breakout_link | bool }}
+                {% endif %}
+                subscribed_bandwidth: {{ wan.subscribed_bandwidth | int }}
+                enable_pppoe: {{ wan.enable_pppoe | bool }}
+                {% if wan.exclusive_for_local_breakout is defined %}
+                exclusive_for_local_breakout: {{ wan.exclusive_for_local_breakout | bool }}
+                {% endif %}
+              {% endfor %}
+            lan_segment:
+              {% for each in device_prefixes %}
+              - lan_segment_name: "{{ each.prefix.vlan.name }}"
+                lan_segment_type: direct
+                vlan: {{ each.prefix.vlan.vid | int }}
+                department: "{{ each.prefix.vrf.name }}"
+                ip_prefix: "{{ each.iface.address }}"
+                dhcp: true
+                additional_config:
+                  dhcp:
+                    range_low: "{{ each.prefix.dhcp.low }}"
+                    range_high: "{{ each.prefix.dhcp.high }}"
+                    max_lease_time: 86400
+                    name_server:
+                      - 1.1.1.1
+                      - 8.8.8.8
+                    subnet: "{{ each.iface.address }}"
+                lan_ports:
+                - "{{ each.iface.interface.name }}"
+              {% endfor %}
+        site_deployment_capabilities:
+          - SDWAN
+      properties:
+        property:
+          - name: site_advanced_config
+            value:
+              nameserver:
+                {% for each in site_devices.cpe.config_context.nameserver %}
+                - "{{ each }}"
+                {% endfor %}
+              ntpserver: "{{ site_devices.cpe.config_context.ntpserver }}"
+              timezone: "{{ site_devices.cpe.config_context.timezone }}"
+      on_premise_site_info:
+        site_role: spoke
+        ha_info:
+          ha_topology: STANDALONE
+        device:
+          - device_family: "{{ site_devices.cpe.config_context.device_family }}"
+            device_name: "{{ site_name_dictionary.space_replaced }}"
+            device_template: "{{ site_devices.cpe.config_context.device_template }}"
+            device_details:
+              serial_number: "{{ site_devices.cpe.serial }}"
+              auto_activate: true
+            oam_traffic: {}
+            wan_link:
+              {% for each in site_devices.cpe.config_context.wan %}
+              - wan_link_name: "{{ each.wan_link }}"
+                local_interface: "{{ each.local_interface }}"
+                wan_link_type: "{{ each.wan_link_type }}"
+                {% if each.access_type is defined %}
+                access_type: "{{ each.access_type }}"
+                {% endif %}
+                address_assignment: "{{ each.address_assignment }}"
+                {% if each.static_ip_assignment is defined %}
+                static_ip_assignment:
+                  ip_address: "{{ each.static_ip_assignment.ip_address }}"
+                  gateway_ip: "{{ each.static_ip_assignment.gateway_ip }}"
+                {% endif %}
+                local_breakout_enabled: {{ each.local_breakout_enabled | bool }}
+                {% if each.nat_info is defined %}
+                nat_info:
+                  nat_enabled: {{ each.nat_info.nat_enabled | bool }}
+                  source_nat_interface_based: {{ each.nat_info.source_nat_interface_based | bool }}
+                {% endif %}
+                {% if each.preferred_breakout_link is defined %}
+                preferred_breakout_link: {{ each.preferred_breakout_link | bool }}
+                {% endif %}
+                {% if each.bgp_info is defined %}
+                bgp_info: {{ each.bgp_info | bool }}
+                {% endif %}
+                {% if each.used_for_meshing is defined %}
+                used_for_meshing: {{ each.used_for_meshing | bool }}
+                {% endif %}
+                {% if each.mesh_overlay_link_type is defined %}
+                mesh_overlay_link_type: "{{ each.mesh_overlay_link_type }}"
+                {% endif %}
+                used_for_oam: {{ each.used_for_oam | bool }}
+                traffic_type: "{{ each.traffic_type }}"
+                backup_link: {{ each.backup_link | bool }}
+                default_link: {{ each.default_link | bool }}
+                vpn:
+                  {% for vpn in each.vpn %}
+                  - vpn_name: "{{ vpn.vpn_name }}"
+                  {% endfor %}
+              {% endfor %}
+            device_role: SDWAN
+        gateway_sites:
+          {% for each in site_devices.cpe.config_context.gateway_sites %}
+          - gateway_name: "{{ each.gateway_name }}"
+            gateway_role: "{{ each.gateway_role }}"
+          {% endfor %}
+        region: regional

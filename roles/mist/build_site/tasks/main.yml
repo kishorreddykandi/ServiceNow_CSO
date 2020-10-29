@@ -1,0 +1,46 @@
+### ---------------------------------------------------------------------------
+### BUILD PAYLOAD FOR SITE
+### ---------------------------------------------------------------------------
+- name: "Create a YAML payload with Mist site details"
+  template:
+    src: mist_build_site.j2
+    dest: /var/tmp/mist_build_site.yml
+    mode: 0640
+
+- name: Remove blank lines between matches
+  lineinfile:
+    path: /var/tmp/mist_build_site.yml
+    regexp: '(^\s*$)'
+    state: absent
+
+- name: "set yaml file to yaml_config var"
+  set_fact:
+    yaml_config: "{{ lookup('file','/var/tmp/mist_build_site.yml') | from_yaml }}"
+
+- name: "debug as yaml"
+  debug:
+    msg: "{{ yaml_config }}"
+
+- name: "debug as json"
+  debug:
+    msg: "{{ yaml_config | to_json }}"
+
+### ---------------------------------------------------------------------------
+### CREATE SITE IN MIST
+### ---------------------------------------------------------------------------
+- name: "Create a new site in Mist"
+  uri:
+    url: "https://{{ mist.base_url }}/orgs/{{ mist.id.org }}/sites"
+    method: POST
+    return_content: yes
+    status_code: "200"
+    headers:
+      Authorization: "Token {{ mist.api_token }}"
+    body: "{{ yaml_config | to_json }}"
+    force_basic_auth: yes
+    body_format: json
+  register: create_site
+
+- name: "setting site_id variable"
+  set_fact:
+    site_id: "{{ create_site.json.id }}"

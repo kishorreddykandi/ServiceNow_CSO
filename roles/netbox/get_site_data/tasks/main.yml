@@ -1,0 +1,27 @@
+### ---------------------------------------------------------------------------
+### FIND SITE INFO
+### ---------------------------------------------------------------------------
+- name: "Site data from Netbox"
+  uri:
+    url: "https://{{ netbox.base_url }}/dcim/sites/?slug={{ site_name_dictionary.slug }}"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ netbox.api_token }}"
+    force_basic_auth: yes
+    validate_certs: false
+  register: site_data
+
+- name: "setting site_data variable"
+  set_fact:
+    site_data: "{{ site_data.json.results }}"
+
+- name: "cleaning up device data into dictionary values"
+  set_fact:
+    site_data: "{{ site_data | format_netbox_site_data }}"
+
+- name: "debug site_data"
+  debug:
+    msg: "{{ site_data }}"

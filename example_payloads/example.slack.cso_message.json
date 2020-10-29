@@ -1,0 +1,64 @@
+{
+  "blocks": [
+    {
+      "text": {
+        "text": ":signal_strength:  New SD-WAN site created  :signal_strength:",
+        "type": "plain_text"
+      },
+      "type": "header"
+    },
+    {
+      "elements": [
+        {
+          "text": "*Network Operations Bot* :robot_face:  |  Network change",
+          "type": "mrkdwn"
+        }
+      ],
+      "type": "context"
+    },
+    { "type": "divider" },
+    {
+      "text": { "text": " :paperclip: *Site Details*", "type": "mrkdwn" },
+      "type": "section"
+    },
+    {
+      "text": {
+        "text": "*Site Name*: <https://contrail-juniper.net/site/site_management|sugar-land>\n:white_small_square: *Street Address*: `1529 Hwy 6`\n:white_small_square: *City, State*: `Sugar Land, TX`\n:white_small_square: *Zip Code*: `77478`\n:white_small_square: *Country*: `United States`\n",
+        "type": "mrkdwn"
+      },
+      "type": "section",
+      "accessory": {
+        "type": "image",
+        "image_url": "https://raw.githubusercontent.com/packetferret/CSO-Ansible-Netbox/master/images/juniper_burst_icon.png",
+        "alt_text": "Juniper SD-LAN"
+      }
+    },
+    { "type": "divider" },
+    {
+      "fields": [
+        {
+          "text": "*IoT Network:*\n :white_small_square: prefix: `10.1.43.0/24`\n :white_small_square: vrf: `IoT`\n :white_small_square: rd: `100:3`\n :white_small_square: vlan name: `IoT`\n :white_small_square: vlan id: `13`",
+          "type": "mrkdwn"
+        },
+        {
+          "text": "*PCI Network:*\n :white_small_square: prefix: `10.1.44.0/24`\n :white_small_square: vrf: `PCI`\n :white_small_square: rd: `100:4`\n :white_small_square: vlan name: `PCI`\n :white_small_square: vlan id: `14`",
+          "type": "mrkdwn"
+        },
+        {
+          "text": "*Guest Network:*\n :white_small_square: prefix: `10.1.42.0/24`\n :white_small_square: vrf: `Guest`\n :white_small_square: rd: `100:2`\n :white_small_square: vlan name: `Guest`\n :white_small_square: vlan id: `12`",
+          "type": "mrkdwn"
+        },
+        {
+          "text": "*Network Management:*\n :white_small_square: prefix: `10.1.40.0/24`\n :white_small_square: vrf: `Default`\n :white_small_square: rd: `1:1`\n :white_small_square: vlan name: `Network`\n :white_small_square: vlan id: `10`",
+          "type": "mrkdwn"
+        },
+        {
+          "text": "*Employee Network:*\n :white_small_square: prefix: `10.1.41.0/24`\n :white_small_square: vrf: `Default`\n :white_small_square: rd: `1:1`\n :white_small_square: vlan name: `Employee`\n :white_small_square: vlan id: `11`",
+          "type": "mrkdwn"
+        }
+      ],
+      "type": "section",
+      "block_id": "section789"
+    }
+  ]
+}

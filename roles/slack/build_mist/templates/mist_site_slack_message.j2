@@ -1,0 +1,25 @@
+#jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
+---
+blocks:
+  - type: header
+    text:
+      type: plain_text
+      text: ':signal_strength:  New Wireless site created  :signal_strength:'
+  - type: context
+    elements:
+      - text: '*Network Operations Bot* :robot_face:  |  Network change'
+        type: mrkdwn
+  - type: divider
+  - type: section
+    text:
+      type: mrkdwn
+      text: |
+        *Site Name*: <https://manage.mist.com/admin/?org_id={{ mist.id.org }}#!configuration/site/{{ site_id }}|{{ site_data.name }}>
+        *WLANs*: 
+          - `Redtail: Employee` (inherited from Site Template)
+          - `Redtail: Guest` (inherited from Site Template)
+    accessory:
+      type: image
+      image_url: 'https://raw.githubusercontent.com/packetferret/CSO-Ansible-Netbox/master/images/mist.png'
+      alt_text: Juniper Mist
+  - type: divider

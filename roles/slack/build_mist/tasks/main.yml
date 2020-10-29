@@ -1,0 +1,41 @@
+### ---------------------------------------------------------------------------
+### BUILD YAML PAYLOAD
+### ---------------------------------------------------------------------------
+- name: "Create a YAML payload with CSO site details"
+  template:
+    src: mist_site_slack_message.j2
+    dest: /var/tmp/mist_site_slack_message.yml
+    mode: 0640
+
+- name: Remove blank lines between matches
+  lineinfile:
+    path: /var/tmp/mist_site_slack_message.yml
+    regexp: '(^\s*$)'
+    state: absent
+
+- name: "set yaml file to yaml_config var"
+  set_fact:
+    yaml_config: "{{ lookup('file','/var/tmp/mist_site_slack_message.yml') | from_yaml }}"
+
+- name: "debug as yaml"
+  debug:
+    msg: "{{ yaml_config }}"
+
+- name: "debug as json"
+  debug:
+    msg: "{{ yaml_config | to_json }}"
+
+### ---------------------------------------------------------------------------
+### PUSH TO SLACK
+### ---------------------------------------------------------------------------
+- name: "send an update message to team on Slack"
+  uri:
+    url: "https://{{ slack.base_url }}/{{ slack.sdlan_uri }}"
+    method: POST
+    return_content: yes
+    status_code: "200"
+    body: "{{ yaml_config | to_json }}"
+    force_basic_auth: yes
+    body_format: json
+  register: slack_message
+  run_once: True

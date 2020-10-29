@@ -1,0 +1,321 @@
+device_prefixes:
+  - iface:
+      address: 10.1.43.1/24
+      created: "2020-09-15"
+      custom_fields: {}
+      description: IoT Network Gateway
+      dns_name: ""
+      family:
+        label: IPv4
+        value: 4
+      id: 116
+      interface:
+        device:
+          display_name: SugarLand-fw1
+          id: 27
+          name: SugarLand-fw1
+          url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/devices/27/
+        id: 86
+        name: ge-0/0/2
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/interfaces/86/
+        virtual_machine: null
+      last_updated: "2020-09-15T20:19:27.821351Z"
+      nat_inside: null
+      nat_outside: null
+      role: null
+      status:
+        id: 1
+        label: Active
+        value: active
+      tags:
+        - iot
+      tenant:
+        id: 3
+        name: Redtail
+        slug: redtail
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/tenancy/tenants/3/
+      vrf:
+        id: 2
+        name: IoT
+        rd: "100:3"
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/ipam/vrfs/2/
+    prefix:
+      description: IoT Network Prefix
+      dhcp:
+        high: 10.1.43.250
+        low: 10.1.43.10
+      gateway: 10.1.43.1
+      id: 75
+      prefix: 10.1.43.0/24
+      site:
+        id: 27
+        slug: sugar-land
+      tags:
+        - iot
+      tenant:
+        id: 3
+        slug: redtail
+      vlan:
+        id: 75
+        name: IoT
+        vid: 13
+      vrf:
+        id: 2
+        name: IoT
+        rd: "100:3"
+  - iface:
+      address: 10.1.44.1/24
+      created: "2020-09-15"
+      custom_fields: {}
+      description: PCI Network Gateway
+      dns_name: ""
+      family:
+        label: IPv4
+        value: 4
+      id: 117
+      interface:
+        device:
+          display_name: SugarLand-fw1
+          id: 27
+          name: SugarLand-fw1
+          url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/devices/27/
+        id: 87
+        name: ge-0/0/3
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/interfaces/87/
+        virtual_machine: null
+      last_updated: "2020-09-15T20:19:36.924600Z"
+      nat_inside: null
+      nat_outside: null
+      role: null
+      status:
+        id: 1
+        label: Active
+        value: active
+      tags:
+        - pci
+      tenant:
+        id: 3
+        name: Redtail
+        slug: redtail
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/tenancy/tenants/3/
+      vrf:
+        id: 3
+        name: PCI
+        rd: "100:4"
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/ipam/vrfs/3/
+    prefix:
+      description: PCI Network Prefix
+      dhcp:
+        high: 10.1.44.250
+        low: 10.1.44.10
+      gateway: 10.1.44.1
+      id: 76
+      prefix: 10.1.44.0/24
+      site:
+        id: 27
+        slug: sugar-land
+      tags:
+        - pci
+      tenant:
+        id: 3
+        slug: redtail
+      vlan:
+        id: 76
+        name: PCI
+        vid: 14
+      vrf:
+        id: 3
+        name: PCI
+        rd: "100:4"
+  - iface:
+      address: 10.1.42.1/24
+      created: "2020-09-15"
+      custom_fields: {}
+      description: Guest Network Gateway
+      dns_name: ""
+      family:
+        label: IPv4
+        value: 4
+      id: 115
+      interface:
+        device:
+          display_name: SugarLand-fw1
+          id: 27
+          name: SugarLand-fw1
+          url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/devices/27/
+        id: 86
+        name: ge-0/0/2
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/interfaces/86/
+        virtual_machine: null
+      last_updated: "2020-09-15T20:19:18.972778Z"
+      nat_inside: null
+      nat_outside: null
+      role: null
+      status:
+        id: 1
+        label: Active
+        value: active
+      tags:
+        - guest
+      tenant:
+        id: 3
+        name: Redtail
+        slug: redtail
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/tenancy/tenants/3/
+      vrf:
+        id: 4
+        name: Guest
+        rd: "100:2"
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/ipam/vrfs/4/
+    prefix:
+      description: Guest Network Prefix
+      dhcp:
+        high: 10.1.42.250
+        low: 10.1.42.10
+      gateway: 10.1.42.1
+      id: 74
+      prefix: 10.1.42.0/24
+      site:
+        id: 27
+        slug: sugar-land
+      tags:
+        - guest
+      tenant:
+        id: 3
+        slug: redtail
+      vlan:
+        id: 74
+        name: Guest
+        vid: 12
+      vrf:
+        id: 4
+        name: Guest
+        rd: "100:2"
+  - iface:
+      address: 10.1.40.1/24
+      created: "2020-09-15"
+      custom_fields: {}
+      description: Network Management Gateway
+      dns_name: ""
+      family:
+        label: IPv4
+        value: 4
+      id: 113
+      interface:
+        device:
+          display_name: SugarLand-fw1
+          id: 27
+          name: SugarLand-fw1
+          url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/devices/27/
+        id: 86
+        name: ge-0/0/2
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/interfaces/86/
+        virtual_machine: null
+      last_updated: "2020-09-15T20:18:52.486680Z"
+      nat_inside: null
+      nat_outside: null
+      role: null
+      status:
+        id: 1
+        label: Active
+        value: active
+      tags:
+        - network
+      tenant:
+        id: 3
+        name: Redtail
+        slug: redtail
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/tenancy/tenants/3/
+      vrf:
+        id: 5
+        name: Default
+        rd: "1:1"
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/ipam/vrfs/5/
+    prefix:
+      description: Network Management Prefix
+      dhcp:
+        high: 10.1.40.250
+        low: 10.1.40.10
+      gateway: 10.1.40.1
+      id: 72
+      prefix: 10.1.40.0/24
+      site:
+        id: 27
+        slug: sugar-land
+      tags:
+        - network
+      tenant:
+        id: 3
+        slug: redtail
+      vlan:
+        id: 72
+        name: Network
+        vid: 10
+      vrf:
+        id: 5
+        name: Default
+        rd: "1:1"
+  - iface:
+      address: 10.1.41.1/24
+      created: "2020-09-15"
+      custom_fields: {}
+      description: Employee Network Gateway
+      dns_name: ""
+      family:
+        label: IPv4
+        value: 4
+      id: 114
+      interface:
+        device:
+          display_name: SugarLand-fw1
+          id: 27
+          name: SugarLand-fw1
+          url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/devices/27/
+        id: 86
+        name: ge-0/0/2
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/dcim/interfaces/86/
+        virtual_machine: null
+      last_updated: "2020-09-15T20:19:11.074676Z"
+      nat_inside: null
+      nat_outside: null
+      role: null
+      status:
+        id: 1
+        label: Active
+        value: active
+      tags:
+        - employee
+      tenant:
+        id: 3
+        name: Redtail
+        slug: redtail
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/tenancy/tenants/3/
+      vrf:
+        id: 5
+        name: Default
+        rd: "1:1"
+        url: https://netbox-v285.centralus.cloudapp.azure.com/api/ipam/vrfs/5/
+    prefix:
+      description: Employee Network Prefix
+      dhcp:
+        high: 10.1.41.250
+        low: 10.1.41.10
+      gateway: 10.1.41.1
+      id: 73
+      prefix: 10.1.41.0/24
+      site:
+        id: 27
+        slug: sugar-land
+      tags:
+        - employee
+      tenant:
+        id: 3
+        slug: redtail
+      vlan:
+        id: 73
+        name: Employee
+        vid: 11
+      vrf:
+        id: 5
+        name: Default
+        rd: "1:1"

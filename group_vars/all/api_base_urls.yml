@@ -1,0 +1,12 @@
+---
+slack:
+  base_url: "hooks.slack.com/services"
+
+mist:
+  base_url: "api.mist.com/api/v1"
+
+cso:
+  base_url: "contrail-juniper.net"
+
+netbox:
+  base_url: "netbox-v285.centralus.cloudapp.azure.com/api"

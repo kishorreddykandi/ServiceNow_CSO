@@ -1,0 +1,26 @@
+{
+  "auth": {
+    "identity": {
+      "methods": [
+        "password"
+      ],
+      "password": {
+        "user": {
+          "domain": {
+            "id": "default"
+          },
+          "name": "{{ cso.username }}",
+          "password": "{{ cso.password }}"
+        }
+      }
+    },
+    "scope": {
+      "project": {
+        "domain": {
+          "id": "default"
+        },
+        "name": "{{ tenant_name }}"
+      }
+    }
+  }
+}

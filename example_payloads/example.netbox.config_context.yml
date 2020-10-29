@@ -1,0 +1,69 @@
+---
+country: US
+device_family: juniper-srx
+device_template: Redtail/redtail_srx_3xx_ztp
+gateway_sites:
+- gateway_name: Hub-Dallas
+  gateway_role: PRIMARY_GW
+- gateway_name: Hub-Austin
+  gateway_role: SECONDARY_GW
+nameserver:
+- 8.8.8.8
+- 8.8.4.4
+ntpserver: 216.239.35.4
+site_role: spoke
+timezone: America/Chicago
+wan:
+- access_type: Ethernet
+  address_assignment: DHCP
+  backup_link: false
+  bgp_info: false
+  cost: 800
+  cost_currency: USD
+  default_link: false
+  enable_pppoe: false
+  exclusive_for_local_breakout: false
+  local_breakout_enabled: true
+  local_interface: ge-0/0/0
+  nat_info:
+    nat_enabled: true
+    source_nat_interface_based: true
+  preferred_breakout_link: true
+  provider: Comcast
+  subscribed_bandwidth: 1000
+  traffic_type: DATA_ONLY
+  used_for_meshing: false
+  used_for_oam: true
+  vpn:
+  - vpn_name: Redtail_DefaultVPN
+  - vpn_name: Guest
+  - vpn_name: PCI
+  - vpn_name: IoT
+  wan_link: WAN_0
+  wan_link_type: Internet
+- address_assignment: STATIC
+  backup_link: false
+  cost: 800
+  cost_currency: USD
+  default_link: false
+  enable_pppoe: false
+  local_breakout_enabled: false
+  local_interface: ge-0/0/1
+  mesh_overlay_link_type: GRE
+  mesh_tag:
+  - MPLS
+  provider: Verizon
+  static_ip_assignment:
+    gateway_ip: 10.1.102.1
+    ip_address: 10.1.102.111/24
+  subscribed_bandwidth: 1000
+  traffic_type: DATA_ONLY
+  used_for_meshing: true
+  used_for_oam: false
+  vpn:
+  - vpn_name: Redtail_DefaultVPN
+  - vpn_name: Guest
+  - vpn_name: PCI
+  - vpn_name: IoT
+  wan_link: WAN_1
+  wan_link_type: MPLS

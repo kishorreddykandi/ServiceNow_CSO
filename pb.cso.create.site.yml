@@ -1,0 +1,28 @@
+---
+  ### ---------------------------------------------------------------------------
+  ### CREATE AN SDWAN SITE IN CSO
+  ### ---------------------------------------------------------------------------
+  - hosts: localhost
+    connection: local
+    gather_facts: False
+    become: False
+    any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
+    roles:
+      ### ---------------------------------------------------------------------------
+      ### Netbox work 
+      ### ---------------------------------------------------------------------------
+      - { role: netbox/get_device_data }
+      - { role: netbox/get_site_data }
+      - { role: netbox/get_site_prefixes }
+      - { role: netbox/get_device_prefixes }
+      ### ---------------------------------------------------------------------------
+      ### CSO SD-WAN work 
+      ### ---------------------------------------------------------------------------
+      - { role: cso/get_token }
+      - { role: cso/build_site }
+      - { role: slack/build_cso }
+      ### ---------------------------------------------------------------------------
+      ### Mist Wireless work  
+      ### ---------------------------------------------------------------------------
+      - { role: mist/build_site }
+      - { role: slack/build_mist }

@@ -1,0 +1,29 @@
+### ---------------------------------------------------------------------------
+### BUILD AUTHENTICATION PAYLOAD FOR CSO
+### ---------------------------------------------------------------------------
+- name: "Create a JSON payload with username and password for our auth task"
+  template:
+    src: cso_auth.j2
+    dest: "/var/tmp/cso_auth.json"
+    mode: 0640
+  run_once: True
+
+### ---------------------------------------------------------------------------
+### RECEIVE AUTH TOKEN FROM CSO
+### ---------------------------------------------------------------------------
+- name: "Login to CSO and retrieve AUTH token"
+  uri:
+    url: "https://{{ cso.base_url }}/v3/auth/tokens"
+    method: POST
+    body: "{{ lookup('file','/var/tmp/cso_auth.json') }}"
+    return_content: yes
+    status_code: "201"
+    body_format: json
+    validate_certs: false
+  register: login
+  run_once: True
+
+- name: "Setting the AUTH token based on the headers received"
+  set_fact:
+    token: "{{ login.x_subject_token }}"
+  run_once: True

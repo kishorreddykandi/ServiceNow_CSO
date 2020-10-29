@@ -1,0 +1,28 @@
+### ---------------------------------------------------------------------------
+### FIND PREFIXES ON THE DEVICE
+### ---------------------------------------------------------------------------
+- name: "Use 'gateway' variable as a parameter to get interface information"
+  uri:
+    url: "https://{{ netbox.base_url }}/ipam/ip-addresses/?address={{ item.gateway }}"
+    method: GET
+    return_content: yes
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ netbox.api_token }}"
+    force_basic_auth: yes
+    validate_certs: false
+  
+  loop: "{{ site_prefixes }}"
+  register: interfaces
+
+# - debug:
+#     msg: "{{ interfaces }}"
+
+- name: "combining interface information with prefixes"
+  set_fact:
+    device_prefixes: "{{ interfaces.results | format_netbox_interfaces_and_prefixes }}"
+
+- name: "debug device_prefixes"
+  debug:
+    msg: "{{ device_prefixes }}"

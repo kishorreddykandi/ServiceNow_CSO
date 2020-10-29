@@ -1,0 +1,303 @@
+{
+    "input": {
+        "tenant_name": "Redtail",
+        "deployment_scenario": "managed_wan_v2",
+        "site": [
+            {
+                "site_name": "Katy",
+                "site_basic_properties": {
+                    "site_name": "Katy",
+                    "site_group": [],
+                    "site_role": "SPOKE",
+                    "dvpn_params": {
+                        "create_dvpn_threshold": "5",
+                        "delete_dvpn_threshold": "2"
+                    },
+                    "site_address": {
+                        "street": "6331 Highway Boulevard",
+                        "city": "Katy",
+                        "state": "TX",
+                        "zip_code": "77494",
+                        "country": "US"
+                    },
+                    "site_contact": {
+                        "contact_name": "Calvin Remsburg",
+                        "email_address": "cremsburg@juniper.net",
+                        "phone_number": "8323981171"
+                    },
+                    "network_seg": true,
+                    "cloud_service": "EDGE",
+                    "site_type": "on_premise",
+                    "topology": "mesh",
+                    "sla_mgmt": "FINE",
+                    "device_template": [
+                        {
+                            "template_name": "Redtail/redtail_srx_3xx_ztp",
+                            "device_name": "Katy",
+                            "wan_link_info": [
+                                {
+                                    "wan_link": "WAN_0",
+                                    "wan_link_type": "Internet",
+                                    "cost_currency": "USD",
+                                    "access_type": "Ethernet",
+                                    "local_breakout_enabled": true,
+                                    "provider": "Comcast",
+                                    "cost": 800,
+                                    "default_link": false,
+                                    "backup_link": false,
+                                    "preferred_breakout_link": true,
+                                    "subscribed_bandwidth": 1000,
+                                    "enable_pppoe": false,
+                                    "exclusive_for_local_breakout": false
+                                },
+                                {
+                                    "wan_link": "WAN_1",
+                                    "wan_link_type": "MPLS",
+                                    "cost_currency": "USD",
+                                    "local_breakout_enabled": false,
+                                    "provider": "Verizon",
+                                    "cost": 800,
+                                    "default_link": false,
+                                    "backup_link": false,
+                                    "subscribed_bandwidth": 1000,
+                                    "enable_pppoe": false
+                                }
+                            ],
+                            "lan_segment": [
+                                {
+                                    "lan_segment_name": "IoT",
+                                    "lan_segment_type": "direct",
+                                    "vlan": 13,
+                                    "department": "IoT",
+                                    "ip_prefix": "10.1.33.1/24",
+                                    "dhcp": true,
+                                    "additional_config": {
+                                        "dhcp": {
+                                            "range_low": "10.1.33.10",
+                                            "range_high": "10.1.33.250",
+                                            "max_lease_time": 86400,
+                                            "name_server": [
+                                                "1.1.1.1",
+                                                "8.8.8.8"
+                                            ],
+                                            "subnet": "10.1.33.1/24"
+                                        }
+                                    },
+                                    "lan_ports": [
+                                        "LAN_2"
+                                    ]
+                                },
+                                {
+                                    "lan_segment_name": "PCI",
+                                    "lan_segment_type": "direct",
+                                    "vlan": 14,
+                                    "department": "PCI",
+                                    "ip_prefix": "10.1.34.1/24",
+                                    "dhcp": true,
+                                    "additional_config": {
+                                        "dhcp": {
+                                            "range_low": "10.1.34.10",
+                                            "range_high": "10.1.34.250",
+                                            "max_lease_time": 86400,
+                                            "name_server": [
+                                                "1.1.1.1",
+                                                "8.8.8.8"
+                                            ],
+                                            "subnet": "10.1.34.1/24"
+                                        }
+                                    },
+                                    "lan_ports": [
+                                        "LAN_3"
+                                    ]
+                                },
+                                {
+                                    "lan_segment_name": "Guest",
+                                    "lan_segment_type": "direct",
+                                    "vlan": 12,
+                                    "department": "Guest",
+                                    "ip_prefix": "10.1.32.1/24",
+                                    "dhcp": true,
+                                    "additional_config": {
+                                        "dhcp": {
+                                            "range_low": "10.1.32.10",
+                                            "range_high": "10.1.32.250",
+                                            "max_lease_time": 86400,
+                                            "name_server": [
+                                                "1.1.1.1",
+                                                "8.8.8.8"
+                                            ],
+                                            "subnet": "10.1.32.1/24"
+                                        }
+                                    },
+                                    "lan_ports": [
+                                        "LAN_2"
+                                    ]
+                                },
+                                {
+                                    "lan_segment_name": "Network",
+                                    "lan_segment_type": "direct",
+                                    "vlan": 10,
+                                    "department": "Default",
+                                    "ip_prefix": "10.1.30.1/24",
+                                    "dhcp": true,
+                                    "additional_config": {
+                                        "dhcp": {
+                                            "range_low": "10.1.30.10",
+                                            "range_high": "10.1.30.250",
+                                            "max_lease_time": 86400,
+                                            "name_server": [
+                                                "1.1.1.1",
+                                                "8.8.8.8"
+                                            ],
+                                            "subnet": "10.1.30.1/24"
+                                        }
+                                    },
+                                    "lan_ports": [
+                                        "LAN_2"
+                                    ]
+                                },
+                                {
+                                    "lan_segment_name": "Employee",
+                                    "lan_segment_type": "direct",
+                                    "vlan": 11,
+                                    "department": "Default",
+                                    "ip_prefix": "10.1.31.1/24",
+                                    "dhcp": true,
+                                    "additional_config": {
+                                        "dhcp": {
+                                            "range_low": "10.1.31.10",
+                                            "range_high": "10.1.31.250",
+                                            "max_lease_time": 86400,
+                                            "name_server": [
+                                                "1.1.1.1",
+                                                "8.8.8.8"
+                                            ],
+                                            "subnet": "10.1.31.1/24"
+                                        }
+                                    },
+                                    "lan_ports": [
+                                        "LAN_2"
+                                    ]
+                                }
+                            ]
+                        }
+                    ],
+                    "site_deployment_capabilities": [
+                        "SDWAN"
+                    ]
+                },
+                "properties": {
+                    "property": [
+                        {
+                            "name": "site_advanced_config",
+                            "value": {
+                                "nameserver": [
+                                    "8.8.8.8",
+                                    "8.8.4.4"
+                                ],
+                                "ntpserver": "216.239.35.4",
+                                "timezone": "America/Chicago"
+                            }
+                        }
+                    ]
+                },
+                "on_premise_site_info": {
+                    "site_role": "spoke",
+                    "ha_info": {
+                        "ha_topology": "STANDALONE"
+                    },
+                    "device": [
+                        {
+                            "device_family": "juniper-srx",
+                            "device_name": "Katy",
+                            "device_template": "Redtail/redtail_srx_3xx_ztp",
+                            "device_details": {
+                                "serial_number": "CW4319AN0122",
+                                "auto_activate": true
+                            },
+                            "oam_traffic": {},
+                            "wan_link": [
+                                {
+                                    "wan_link_name": "WAN_0",
+                                    "local_interface": "ge-0/0/0",
+                                    "wan_link_type": "Internet",
+                                    "access_type": "Ethernet",
+                                    "address_assignment": "DHCP",
+                                    "local_breakout_enabled": true,
+                                    "nat_info": {
+                                        "nat_enabled": true,
+                                        "source_nat_interface_based": true
+                                    },
+                                    "preferred_breakout_link": true,
+                                    "bgp_info": false,
+                                    "used_for_meshing": false,
+                                    "used_for_oam": true,
+                                    "traffic_type": "DATA_ONLY",
+                                    "backup_link": false,
+                                    "default_link": false,
+                                    "vpn": [
+                                        {
+                                            "vpn_name": "Redtail_DefaultVPN"
+                                        },
+                                        {
+                                            "vpn_name": "Guest"
+                                        },
+                                        {
+                                            "vpn_name": "PCI"
+                                        },
+                                        {
+                                            "vpn_name": "IoT"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "wan_link_name": "WAN_1",
+                                    "local_interface": "ge-0/0/1",
+                                    "wan_link_type": "MPLS",
+                                    "address_assignment": "STATIC",
+                                    "static_ip_assignment": {
+                                        "ip_address": "10.1.102.111/24",
+                                        "gateway_ip": "10.1.102.1"
+                                    },
+                                    "local_breakout_enabled": false,
+                                    "used_for_meshing": true,
+                                    "mesh_overlay_link_type": "GRE",
+                                    "used_for_oam": false,
+                                    "traffic_type": "DATA_ONLY",
+                                    "backup_link": false,
+                                    "default_link": false,
+                                    "vpn": [
+                                        {
+                                            "vpn_name": "Redtail_DefaultVPN"
+                                        },
+                                        {
+                                            "vpn_name": "Guest"
+                                        },
+                                        {
+                                            "vpn_name": "PCI"
+                                        },
+                                        {
+                                            "vpn_name": "IoT"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "device_role": "SDWAN"
+                        }
+                    ],
+                    "gateway_sites": [
+                        {
+                            "gateway_name": "Hub-Dallas",
+                            "gateway_role": "PRIMARY_GW"
+                        },
+                        {
+                            "gateway_name": "Hub-Austin",
+                            "gateway_role": "SECONDARY_GW"
+                        }
+                    ],
+                    "region": "regional"
+                }
+            }
+        ]
+    }
+}

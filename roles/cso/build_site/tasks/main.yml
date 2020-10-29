@@ -1,0 +1,39 @@
+### ---------------------------------------------------------------------------
+### BUILD PAYLOAD FOR SITE
+### ---------------------------------------------------------------------------
+- name: "Create a YAML payload with site details"
+  template:
+    src: cso_build_site.j2
+    dest: /var/tmp/cso_create_site.yml
+    mode: 0640
+
+- name: Remove blank lines between matches
+  lineinfile:
+    path: /var/tmp/cso_create_site.yml
+    regexp: '(^\s*$)'
+    state: absent
+
+- name: "set yaml file to yaml_config var"
+  set_fact:
+    yaml_config: "{{ lookup('file','/var/tmp/cso_create_site.yml') | from_yaml }}"
+
+- name: "debug as yaml"
+  debug:
+    msg: "{{ yaml_config }}"
+
+- name: "debug as json"
+  debug:
+    msg: "{{ yaml_config | to_json }}"
+
+### ---------------------------------------------------------------------------
+### BUILD SD-WAN SITE IN CSO
+### ---------------------------------------------------------------------------
+- name: build SD-WAN site
+  uri:
+    url: https://{{ cso.base_url }}/tssm/configure-sites
+    method: POST
+    headers:
+      x-auth-token: "{{ token }}"
+    body: "{{ yaml_config | to_json }}"
+    body_format: json
+    status_code: 200

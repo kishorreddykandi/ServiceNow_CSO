@@ -1,0 +1,27 @@
+### ---------------------------------------------------------------------------
+### BUILD PAYLOAD FOR WLAN
+### ---------------------------------------------------------------------------
+- name: "Create a JSON payload with WLAN details"
+  template:
+    src: mist_build_wlan.j2
+    dest: /var/tmp/mist_build_wlan.json
+    mode: 0640
+  run_once: True
+
+### ---------------------------------------------------------------------------
+### CREATE WLAN IN MIST
+### ---------------------------------------------------------------------------
+- name: Create a new WLAN in Mist
+  uri:
+    url: "{{ mist.base_url }}/v1/sites/{{ site_id }}/wlans"
+    method: POST
+    return_content: yes
+    status_code: "200"
+    headers:
+      Content-Type: "application/json"
+      Authorization: "Token {{ mist.api_token }}"
+    body: "{{ lookup('file','/var/tmp/mist_build_wlan.json') }}"
+    force_basic_auth: yes
+    body_format: json
+  register: create_wlan
+  run_once: True

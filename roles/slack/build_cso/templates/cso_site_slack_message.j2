@@ -1,0 +1,43 @@
+#jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
+---
+blocks:
+  - type: header
+    text:
+      type: plain_text
+      text: ':signal_strength:  New SD-WAN site created  :signal_strength:'
+  - type: context
+    elements:
+      - text: '*Network Operations Bot* :robot_face:  |  Network change'
+        type: mrkdwn
+  - type: divider
+  - type: section
+    text:
+      type: mrkdwn
+      text: ' :paperclip: *Site Details*'
+  - type: section
+    text:
+      type: mrkdwn
+      text: |
+        *Site Name*: <https://contrail-juniper.net/site/site_management|{{ site_data.name }}>
+        :white_small_square: *Street Address*: `{{ site_data.street_address }}`
+        :white_small_square: *City, State*: `{{ site_data.city }}, {{ site_data.state }}`
+        :white_small_square: *Zip Code*: `{{ site_data.zip_code }}`
+        :white_small_square: *Country*: `{{ site_data.country }}`
+    accessory:
+      type: image
+      image_url: 'https://raw.githubusercontent.com/packetferret/CSO-Ansible-Netbox/master/images/juniper_burst_icon.png'
+      alt_text: Juniper SD-LAN
+  - type: divider
+  - type: section
+    block_id: section789
+    fields:
+      {% for each in device_prefixes %}
+      - type: mrkdwn
+        text: |-
+          *{{ each.prefix.description }}:*
+           :white_small_square: prefix: `{{ each.prefix.prefix }}`
+           :white_small_square: vrf: `{{ each.prefix.vrf.name }}`
+           :white_small_square: rd: `{{ each.prefix.vrf.rd }}`
+           :white_small_square: vlan name: `{{ each.prefix.vlan.name }}`
+           :white_small_square: vlan id: `{{ each.prefix.vlan.vid }}`
+      {% endfor %}
